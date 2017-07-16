@@ -1,0 +1,9 @@
+compare below protocols and justify there advantages and disadvantages ?
+
+ftp
+smtp
+mom
+soap
+rest
+
+--some tibco protocols

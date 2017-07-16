@@ -1,0 +1,31 @@
+weather table and plant table 
+write a query to display the plants that bloss only in summer.
+
+create table weather(plant_type VARCHAR2(20) , weather VARCHAR2(20) );
+insert into weather values('Plant1', 'Sunny');
+insert into weather values('Plant2', 'Sunny');
+insert into weather values('Plant2', 'Rainy');
+insert into weather values('Plant2', 'Faill');
+insert into weather values('Plant3', 'Sunny');
+
+
+create table plant (plant_name VARCHAR2(20) primary KEY, plant_type VARCHAR2(20));
+insert into plant values('Neem', 'Plant1');
+insert into plant values('Mango', 'Plant1');
+insert into plant values('Banana', 'Plant2');
+insert into plant values('Apple', 'Plant2');
+insert into plant values('Bees', 'Plant3');
+
+
+select p.plant_name, w.weather from weather  w , plant p , 
+(select plant_type   from weather group by plant_type  having count(plant_type) = 1) s  
+where p.plant_type=w.PLANT_TYPE and w.weather='Sunny'
+and s.plant_type = p.plant_type;
+
+
+select plant_NAME, weather from weather p, PLANT PP where 1 = (select count(*) from weather s where p.PLANT_TYPE = s.PLANT_TYPE) AND p.PLANT_TYPE = PP.PLANT_TYPE  AND p.WEATHER ='Sunny';
+
+select W.*, ROW_NUMBER() OVER (PARTITION BY plant_type ORDER BY plant_type) AS RN  FROM WEATHER W;
+
+SELECT W.*, DENSE_RANK() OVER
+      (ORDER BY PLANT_TYPE)  FROM WEATHER W;

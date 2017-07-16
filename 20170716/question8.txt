@@ -1,0 +1,56 @@
+complete the method to get and display json data from below url.
+
+import java.io.*;
+
+import java.net.*;
+
+import org.json.simple.*;
+import org.json.simple.parser.*;
+
+public class JsonSimpleReadExample {
+    public JsonSimpleReadExample() {
+        super();
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println(new JsonSimpleReadExample().parseJson("maze"));
+
+    }
+
+    private int parseJson(String query) throws ParseException, MalformedURLException, IOException {
+        URL uri = new URL("https://jsonmock.hackerrank.com/api/movies/search/?Title=" + query);
+        JSONObject jsonObject = (JSONObject) new JSONParser().parse(new InputStreamReader(uri.openStream()));
+        return ((Long) jsonObject.get("total")).intValue();
+    }
+}
+
+
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>JSONSimpleLearning</groupId>
+    <artifactId>JSONSimple</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <artifactId>json-simple</artifactId>
+            <groupId>com.googlecode.json-simple</groupId>
+            <version>1.1.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>latest</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <sourceDirectory>src/</sourceDirectory>
+        <outputDirectory>classes/</outputDirectory>
+        <resources/>
+    </build>
+    <dependencyManagement>
+        <dependencies/>
+    </dependencyManagement>
+</project>
